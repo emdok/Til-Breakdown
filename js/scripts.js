@@ -58,6 +58,10 @@ $(document).ready(function () {
     var cashTips = parseInt($('input#cashTips').val());
     var ccTips = parseInt($('input#ccTips').val());
 
+    $("#outputPOSCash").text(posCash);
+    $("#outputCashTips").text(cashTips);
+    $("#outputCCTips").text(ccTips);
+
     var actualCash = actualCashMath(tilTotal);
     $("#actualCash").text(actualCash);
 
