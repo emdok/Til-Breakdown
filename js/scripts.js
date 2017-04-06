@@ -52,6 +52,7 @@ $(document).ready(function () {
   $("form").submit(function(event) {
     event.preventDefault();
 
+    $(".breakdown").show();
     weekday = parseInt($("select#weekdays").val());
     var tilTotal = parseInt($('input#tilTotal').val());
     var posCash = parseInt($('input#posCash').val());
@@ -77,6 +78,8 @@ $(document).ready(function () {
 
     var newBreakdown = new weeklyBreakdown(weekday, totalTips);
     newBreakdown.tipPush();
+
+    $(".inputNos").hide();
 
     console.log(tipArray);
     console.log(totalWeeklyTips);
