@@ -1,34 +1,49 @@
 //Back-End Logic
+var weekday;
+var totalTips;
+var tipArray = [];
+var totalWeeklyTips = 0;
 
 var actualCashMath = function(tilTotal) {
   return tilTotal - 300;
 };
 
-function weeklyBreakdown(monday, tuesday, wednesday, thursday, friday, saturday, sunday) {
-  this.monday = monday;
-  this.tuesday = tuesday;
-  this.wednesday = wednesday;
-  this.thursday = thursday;
-  this.friday = friday;
-  this.saturday = saturday;
-  this.sunday = sunday;
+function weeklyBreakdown(weekday, totalTips) {
+  this.monday = 'Monday: ';
+  this.tuesday = 'Tuesday: ';
+  this.wednesday = 'Wednesday: ';
+  this.thursday = 'Thursday: ';
+  this.friday = 'Friday: ';
+  this.saturday = 'Saturday: ';
+  this.sunday = 'Sunday: ';
   this.week = [];
 }
 
 weeklyBreakdown.prototype.tipPush = function() {
   if (weekday === 1) {
-    this.monday = totalTips;
+    tipArray.push(this.monday + totalTips);
+    totalWeeklyTips += totalTips;
   } else if (weekday === 2) {
-    this.tuesday === totalTips;
+    tipArray.push(this.tuesday + totalTips);
+    totalWeeklyTips += totalTips;
   } else if (weekday === 3) {
-    this.wednesday === totalTips;
+    tipArray.push(this.wednesday + totalTips);
+    totalWeeklyTips += totalTips;
   } else if (weekday === 4) {
-    this.thursday === totalTips;
+    tipArray.push(this.thursday + totalTips);
+    totalWeeklyTips += totalTips;
   } else if (weekday === 5) {
-    this.friday === totalTips;
+    tipArray.push(this.friday + totalTips);
+    totalWeeklyTips += totalTips;
   } else if (weekday === 6) {
-    this.saturday === totalTips;
-  } else (weekday === 7)
+    tipArray.push(this.saturday + totalTips);
+    totalWeeklyTips += totalTips;
+  } else if (weekday === 7) {
+    tipArray.push(this.sunday + totalTips);
+    totalWeeklyTips += totalTips;
+  }
+  return tipArray;
+  return totalWeeklyTips;
 }
 
 
@@ -37,7 +52,7 @@ $(document).ready(function () {
   $("form").submit(function(event) {
     event.preventDefault();
 
-    var weekday = $("select#weekdays").val();
+    weekday = parseInt($("select#weekdays").val());
     var tilTotal = parseInt($('input#tilTotal').val());
     var posCash = parseInt($('input#posCash').val());
     var cashTips = parseInt($('input#cashTips').val());
@@ -49,12 +64,18 @@ $(document).ready(function () {
     var difference = actualCash - posCash
     $("#difference").text(difference);
 
-    var totalTips = cashTips + ccTips
+    totalTips = cashTips + ccTips
     $("#totalTips").text(totalTips);
+
 
     var Drop = actualCash - ccTips
     $("#drop").text(Drop);
 
+    var newBreakdown = new weeklyBreakdown(weekday, totalTips);
+    newBreakdown.tipPush();
+
+    console.log(tipArray);
+    console.log(totalWeeklyTips);
 
 
   });
